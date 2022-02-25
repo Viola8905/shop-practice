@@ -10,7 +10,7 @@ client/app/coverage
 # production
 client/app/build
 
-server/.env
+.env
 
 # misc
 .DS_Store
