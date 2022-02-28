@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
-const userRouter = require('./routes/userRouter')
+const userRouter = require('./routes/userRouter');
+const categoryRouter = require("./routes/categoryRouter");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(fileUpload({ useTempFiles: true }));
 
 //Routes
 app.use("/user", userRouter);
+app.use("/api", categoryRouter);
 // Connect to mongoDB
 
 const URI = process.env.MONGODB_URL;
