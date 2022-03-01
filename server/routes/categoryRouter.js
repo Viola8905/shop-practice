@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const categoryCntrl = require("../controllers/categoryCntrl");
 const auth = require('../middleware/auth');
-//const authAdmin = require('../middleware/authAdmin')
 const admin = require('../middleware/admin')
 
 router.get("/category", categoryCntrl.getCategories);
