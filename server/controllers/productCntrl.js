@@ -9,13 +9,18 @@ class APIfeatures{
 	}
 
 	filtering(){
-		const queryObj = { ...this.quryString };//queryString = req.query
-		const excludedFields = ['page','sort','limit'];
+		const queryObj = { ...this.queryString };//queryString = req.query
+		const excludedFields = ['page','sort'];
 		excludedFields.forEach(el => delete(queryObj[el]));
 		let queryStr = JSON.stringify(queryObj)
-		queryStr = queryStr.replace(/|b(gte|gt|lt|lte|regex)\b/g, match => '$' + match);
+		// queryStr = queryStr.replace(/|b(gte|gt|lt|lte|regex)\b/g, match => `$${match}`);
 		//gte = grater than or equal
 		
+		 queryStr = queryStr.replace(
+    /\b(gt|gte|lt|lte|in|regex)\b/g,
+    (match) => `$${match}`
+  ); 
+
 		this.query.find(JSON.parse(queryStr))
 		return this;
 	};
@@ -39,13 +44,13 @@ class APIfeatures{
 const productCntrl = {
   getProducts: async (req, res) => {
     try {
-			const features = new APIfeatures(Products.find(),req.query).filtering().sorting().paginating();
-			const products = await features.query;
+			 const features = new APIfeatures(Products.find(),req.query).filtering().sorting().paginating();
+			 const products = await features.query;
 			res.json({
-				status: 'success',
-				result: products.length,
-				products: products
-			})
+       // products: "success",
+         result: products.length,
+         products: products
+      });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

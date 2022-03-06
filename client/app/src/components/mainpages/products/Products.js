@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
+import {GlobalState } from '../../../GlobalState'
+import ProductItem from '../../ProductItem'
 const Products = () => {
+	const state = useContext(GlobalState)
+	const [products] = state.productsApi.products
 	return (
-		<div>Products list</div>
+		<div className='products'>{
+		
+		}</div>
 	)
 }
 
