@@ -9,20 +9,24 @@ class APIfeatures{
 	}
 
 	filtering(){
-		const queryObj = { ...this.queryString };//queryString = req.query
-		const excludedFields = ['page','sort'];
-		excludedFields.forEach(el => delete(queryObj[el]));
-		let queryStr = JSON.stringify(queryObj)
-		// queryStr = queryStr.replace(/|b(gte|gt|lt|lte|regex)\b/g, match => `$${match}`);
-		//gte = grater than or equal
-		
-		 queryStr = queryStr.replace(
-    /\b(gt|gte|lt|lte|in|regex)\b/g,
-    (match) => `$${match}`
-  ); 
+		 const queryObj = { ...this.queryString }; //queryString = req.query
 
-		this.query.find(JSON.parse(queryStr))
-		return this;
+     const excludedFields = ["page", "sort", "limit"];
+     excludedFields.forEach((el) => delete queryObj[el]);
+
+     let queryStr = JSON.stringify(queryObj);
+     queryStr = queryStr.replace(
+       /\b(gte|gt|lt|lte|regex)\b/g,
+       (match) => "$" + match
+     );
+
+     //    gte = greater than or equal
+     //    lte = lesser than or equal
+     //    lt = lesser than
+     //    gt = greater than
+     this.query.find(JSON.parse(queryStr));
+
+     return this;
 	};
 	sorting(){
 		if(this.queryString.sort){
@@ -34,11 +38,11 @@ class APIfeatures{
 		return this;
 	};
 	paginating(){
-		const page = this.queryString.page*1|| 1
-		const limit = this.quryString.limit*1 || 3
-		const skip = (page-1)*limit;
-		this.query = this.query.skip(skip).limit(limit)
-		return this;
+	 const page = this.queryString.page * 1 || 1;
+   const limit = this.queryString.limit * 1 || 9;
+   const skip = (page - 1) * limit;
+   this.query = this.query.skip(skip).limit(limit);
+   return this;
 	};
 }
 const productCntrl = {
