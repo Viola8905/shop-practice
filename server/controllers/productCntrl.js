@@ -51,9 +51,10 @@ const productCntrl = {
 			 const features = new APIfeatures(Products.find(),req.query).filtering().sorting().paginating();
 			 const products = await features.query;
 			res.json({
-       // products: "success",
-         result: products.length,
-         products: products
+        // products: "success",
+        status: "success",
+        result: products.length,
+        products: products,
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

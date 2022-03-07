@@ -5,13 +5,13 @@ const ProductsApi = () => {
 	const getProducts = async () => {
 		const res = await axios.get("http://localhost:5000/api/products");
 		setProducts(res.data.products)
-		console.log(res.data.products);
+		//console.log(res.data.products);
 	}
 	useEffect(() => {
 		getProducts()
 	},[])
 	return {
-		products: [products, getProducts]
+		products: [products, setProducts]
 	}
 }
 
