@@ -6,12 +6,14 @@ const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const userRouter = require('./routes/userRouter');
 const categoryRouter = require("./routes/categoryRouter");
+const corsMid = require('./middleware/cors')
 
 const app = express();
-
+app.use(cors());
+app.use(corsMid);
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+
 app.use(fileUpload({ useTempFiles: true }));
 
 

@@ -9,7 +9,7 @@ const Header = () => {
    const state = useContext(GlobalState);
    const [isLogged] = state.userApi.isLogged;
    const [isAdmin] = state.userApi.isAdmin;
- 
+   console.log(isLogged)
 
 const logoutUser = async () => {
   await axios.get("/user/logout");
