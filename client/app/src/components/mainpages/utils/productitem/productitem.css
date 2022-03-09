@@ -65,3 +65,9 @@
 	background: teal ;
 	margin-left: 5px;
 }
+
+.product_cart input {
+	position : absolute;
+	width: 25px;
+	height: 25px;
+}
