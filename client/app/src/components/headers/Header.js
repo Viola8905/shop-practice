@@ -7,16 +7,19 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 const Header = () => {
    const state = useContext(GlobalState);
-   const [isLogged] = state.userApi.isLogged;
-   const [isAdmin] = state.userApi.isAdmin;
-   console.log(isLogged)
+   const [isLogged,setIsLogged] = state.userApi.isLogged;
+   const [isAdmin,setIsAdmin] = state.userApi.isAdmin;
+	 const [cart] = state.userApi.cart;
+   
 
 const logoutUser = async () => {
   await axios.get("/user/logout");
 
-  localStorage.removeItem("firstLogin");
+  localStorage.clear();
 
-  window.location.href = "/";
+	setIsAdmin(false);
+	setIsLogged(false);
+  //window.location.href = "/";
 };
 
   const adminRouter = () => {
@@ -78,7 +81,7 @@ const logoutUser = async () => {
         ""
       ) : (
         <div className="cart-icon">
-          <span>0</span>
+          <span>{cart.length}</span>
           <Link to="/cart">
             <img src={Cart} width="30" />
           </Link>
