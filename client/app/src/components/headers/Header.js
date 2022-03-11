@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 const Header = () => {
    const state = useContext(GlobalState);
-   const [isLogged,setIsLogged] = state.userApi.isLogged;
-   const [isAdmin,setIsAdmin] = state.userApi.isAdmin;
+   const [isLogged] = state.userApi.isLogged;
+   const [isAdmin] = state.userApi.isAdmin;
 	 const [cart] = state.userApi.cart;
    
 
@@ -17,9 +17,8 @@ const logoutUser = async () => {
 
   localStorage.clear();
 
-	setIsAdmin(false);
-	setIsLogged(false);
-  //window.location.href = "/";
+	
+  window.location.href = "/";
 };
 
   const adminRouter = () => {
