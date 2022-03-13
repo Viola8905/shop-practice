@@ -8,14 +8,21 @@ import NotFound from './utils/notfound/NotFound';
 import DetailProduct from './detailProduct/DetailProduct';
 import { GlobalState } from '../../GlobalState';
 import PayPal from './cart/PayPal';
+import Categories from './categories/Categories';
 export default function Pages() {
 	const state = useContext(GlobalState);
 	const [isLogged] = state.userApi.isLogged;
+	const [isAdmin] = state.userApi.isAdmin;
 	return (
     <Routes>
       <Route exact path="/" element={<Products />} />
       <Route exact path="/detail/:id" element={<DetailProduct />} />
       <Route exact path="/login" element={isLogged ? NotFound : <Login />} />
+      <Route
+        exact
+        path="/category"
+        element={isAdmin ? <Categories /> : NotFound}
+      />
       <Route
         exact
         path="/register"
