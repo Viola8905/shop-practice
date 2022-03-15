@@ -28,6 +28,7 @@ const CreateProduct = () => {
 
 	const [products] = state.productsApi.products
 	const [onEdit, setOnEdit] = useState(false)
+	const [callback, setCallback] = state.productsApi.callback
 
 	useEffect(() => {
 		if(param.id){
@@ -125,9 +126,7 @@ const CreateProduct = () => {
         );
 			}
       
-
-      setImages(false);
-      setProduct(initialState);
+			setCallback(!callback);
       navigate("/");
     } catch (err) {
       alert(err.response.data.msg);
