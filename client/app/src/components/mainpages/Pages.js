@@ -9,6 +9,7 @@ import DetailProduct from './detailProduct/DetailProduct';
 import { GlobalState } from '../../GlobalState';
 import PayPal from './cart/PayPal';
 import Categories from './categories/Categories';
+import CreateProduct from './createProduct/CreateProduct';
 export default function Pages() {
 	const state = useContext(GlobalState);
 	const [isLogged] = state.userApi.isLogged;
@@ -22,6 +23,16 @@ export default function Pages() {
         exact
         path="/category"
         element={isAdmin ? <Categories /> : NotFound}
+      />
+      <Route
+        exact
+        path="/create_product"
+        element={isAdmin ? <CreateProduct /> : NotFound}
+      />
+      <Route
+        exact
+        path="/edit_product/:id"
+        element={isAdmin ? <CreateProduct /> : NotFound}
       />
       <Route
         exact
